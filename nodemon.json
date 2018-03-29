@@ -1,0 +1,19 @@
+{
+  "restartable":"rs",
+  "ignore":[""],
+  "verbose": true, 
+  "execMap":{
+      "":"node",
+      "test": "gulp test"
+  },
+  "ext": "js json",
+  "watch":[
+    "app/",
+    "common/",
+    "config/"
+  ],
+  "env":{
+    "NODE_ENV":"env", 
+    "PORT":"3000"
+  }
+}

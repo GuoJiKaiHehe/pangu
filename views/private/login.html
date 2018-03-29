@@ -1,0 +1,53 @@
+{%extends "./layout/login-layout.html"%}
+{%block content%}
+    <div class="login-container animated fadeInDown">
+        <div class="loginbox bg-white">
+            <div class="loginbox-title">登录</div>
+            
+            <div class="loginbox-or">
+                <div class="or-line"></div>
+                <!-- <div class="or">OR</div> -->
+            </div>
+            <div class="loginbox-textbox">
+                <input type="text" class="form-control" placeholder="登录名" name="login_name" />
+            </div>
+            <div class="loginbox-textbox">
+                <input type="password" name="password" class="form-control" placeholder="密码" />
+            </div>
+            <div class="loginbox-forgot">
+                <!-- <a href="">Forgot Password?</a> -->
+            </div>
+            <div class="loginbox-submit">
+                <input type="button" class="btn btn-primary btn-block login-btn" value="登录">
+            </div>
+        </div>
+        
+    </div>
+
+
+{%endblock%}
+
+{%block script%}
+<script>
+$(function(){
+    $(".login-btn").click(function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'post',
+            url:"/private/login?{{csrfToken}}",
+            data:{
+                login_name:$(".login-container input[name=login_name]").val(),
+                password:$(".login-container input[name=password]").val()
+            },
+            success:function(res){
+                if(res.error==0){
+                    location.href=res.redirect;
+                }else{
+                    alert(res.message);
+                }
+            },
+        })
+    });
+});
+</script>
+{%endblock%}
